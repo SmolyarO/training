@@ -58,7 +58,7 @@
 		- super (calls the parent constructor)
 		Example:
 		
-	## Groups of operator are listed above
+	## Groups of operators are listed above
 	### Increment and decrement
 		- Postfix increment & decrement, prefix ind & dec
 		Example:
@@ -72,6 +72,41 @@
 		
 	### Unary operators
 		- delete, void, typeof, unary plus +, unary negation -, bitwise not ~, logical not !
+		Example:
+			prop = 2; //noooot good
+			function eq(arg) {
+				if (!(typeof arg == 'string')) {
+					delete prop;
+				}
+			};
+			void (function () {
+				eq(prop);
+			})();
+	### Arithmetic
+		- + - / * %
+		Example:
+		 console.log((2.03%2).toFixed(2));
+		
+	### Relational
+		- in, instanceof, <, <=, >, >=
+		Example:
+		    function C() {};
+				var obj = new C();
+				obj.test = 'test string';
+				function rel () {
+				if (obj instanceof C && 'test' in obj) {
+					alert('oh yeah');
+				}
+			};
+			rel();
+	
+	### Equality
+		- ==, !=, ===, !==
+		Example:
+			if (5 != 6) alert('Incredible!');
+	
+	### Bitwise shift
+		- <<, >>, >>>
 		Example:
 
 
