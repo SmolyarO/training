@@ -62,6 +62,7 @@
 	### Increment and decrement
 		- Postfix increment & decrement, prefix ind & dec
 		Example:
+		
 			// Postfix 
 			var x = 3;
 			y = x++; // y = 3, x = 4
@@ -103,7 +104,9 @@
 	### Equality
 		- ==, !=, ===, !==
 		Example:
-			if (5 != 6) alert('Incredible!');
+			if (5 != 6) {
+				alert('Incredible!');
+			}
 	
 	### Binary logical
 		- &&, ||

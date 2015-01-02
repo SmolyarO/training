@@ -1,7 +1,7 @@
 // Also as a String you can create Number through non-constructor context or basic constructor.
 	var number = 25;  //  Number literal. It implicitly calls Number().
 	var num = Number('23');  //  Without new operator to perform a type conversion
-	var n_obj = new Number(30);  // Number object
+	var numObj = new Number(30);  // Number object
 // Usually I use literal style. Create Number objects explicitly needed rarely.
 	Number("999");  //good
 	new Number(666);  //not good

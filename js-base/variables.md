@@ -37,7 +37,9 @@ Example:
 
 - Usin single var pattern
 Example:
-	var test, anotherVar, third = 3;
+	var test, 
+		anotherVar, 
+		third = 3;
 
 - Declare all vars at the beginning of a function. Don't scatter vars.
 
@@ -46,3 +48,4 @@ Example:
 - I prefere to use short naming in the nearest code.
 - Use understandable var names.
 - Use cammelCase in var names.
+- Constans var MAX_HTTP_RETRY = 10;

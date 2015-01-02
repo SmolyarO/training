@@ -1,10 +1,11 @@
 // You can create string through literal or basic constructor.
-	var s_prim = 'foo';  //primitive string
-	var s_obj = new String('bar');  //string object
+var stringPrim = 'foo';  //primitive string
+var stringObj = new String('bar');  //string object
 	
 // In my opinion it's not a good idea to use string object.
 // because you can do this:
-	s_obj.add = 'property';
+stringObj.add = 'property';
+	
 // but I don't know why you need this
 // also for example primitives passed to eval() are treated as source code.
 // String must be a string so this is a good way:
@@ -35,16 +36,18 @@
 	months.split(',');  // returns array of months
 
 //  .substr() returns the characters in a string beginning at the specified location through the specified number of characters.
-	var sb_str = 'Some interesting text';
-	sb_str.substr(5, 11); // retutns string "interesting"
+	var subStr = 'Some interesting text';
+	subStr.substr(5, 11); // retutns string "interesting"
 
 //  .toLowerCase(), .toUpperCase() returns the value of the string converted to lowercase and to uppercase
 	'ALPHABET'.toLowerCase();  // "alphabet"
 	'alphabet'.toUpperCase();  // "ALPHABET"
+	
 // if you want Capitalize Every Word In String you can use something like this:
-	function toTitleCase(str)
-	{
-		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	function toTitleCase(str) {
+		return str.replace(/\w\S*/g, function(txt) {
+		    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
 	}
 
 // .trim() removes whitespace from both ends of a string

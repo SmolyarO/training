@@ -72,7 +72,7 @@
 	numbers.forEach(fn);  // Current array [2, 4, 6]
 	
 	.every()  // Returns true if every element in this array satisfies the provided testing function.
-	fn = function(element, index, array) {
+	var fn = function(element, index, array) {
 		return isFinite(array[index]) == true;
 	}
 	numbers.every(fn); // returns true
