@@ -21,39 +21,39 @@
 	### Primary are:
 		- this
 		Example:
-		console.log(this === window);
+			console.log(this === window);
 		
 		- function
 		Example:
-		var fn = function (msg) {
-			alert(msg);
-		}
+			var fn = function (msg) {
+				alert(msg);
+			}
 		
 		- [] array init
 		Example:
-		var arr = [1, 2, 3,];
+			var arr = [1, 2, 3,];
 		
 		- [] object literal
 		Example:
-		var obj = {first: 1, second: "2-nd"};
+			var obj = {first: 1, second: "2-nd"};
 		
 		- /\w+/i
 		Example:
-		var re = /^[\w\S]+@[\w\S]+\.[\w]{2,4}$/i; //mail check
+			var re = /^[\w\S]+@[\w\S]+\.[\w]{2,4}$/i; //mail check
 		
 		- () grouping
 		Example:
-		var sum = 2 * (2 + 2)
+			var sum = 2 * (2 + 2)
 		
 	### Left-hand-side expressions are:
 		- Property accessors
 		Example:
-		document.createElement('p');
+			document.createElement('p');
 		
 		- new (creates new instance of a Constructor)
 		Example:
-		function Test() {};
-		var test = new Test();
+			function Test() {};
+			var test = new Test();
 		
 		- super (calls the parent constructor)
 		Example:
@@ -86,7 +86,7 @@
 	### Arithmetic
 		- + - / * %
 		Example:
-		 console.log((2.03%2).toFixed(2));
+		 	console.log((2.03%2).toFixed(2));
 		
 	### Relational
 		- in, instanceof, <, <=, >, >=
