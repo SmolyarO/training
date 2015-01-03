@@ -4,7 +4,7 @@ window.onload = function () {
 	length = numbers.length;
 	//this way
 	for (i; i < length; i++) {
-		if ((numbers[i] % 5) == 0) {
+		if ((numbers[i] % 5) === 0) {
 			console.log(numbers[i] + " is a Correct number");
 		}
 		else {
@@ -13,7 +13,19 @@ window.onload = function () {
 	}
 		//or this
 		for (i; i < length; i++) {
-		(numbers[i] % 5) == 0 ? console.log(numbers[i] + " is a Correct number") : console.log("Next number");
+		(numbers[i] % 5) === 0 ? console.log(numbers[i] + " is a Correct number") : console.log("Next number");
+	}
+	
+	function checker(input) {
+		if (input === 'post') {
+			console.log("New item created");
+		}
+		else if (input === 'put') {
+			console.log("Item updated");
+		}
+		else {
+			console.log("Check operation value!");
+		}
 	}
 	
 }
