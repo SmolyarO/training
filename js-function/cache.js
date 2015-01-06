@@ -1,3 +1,6 @@
+// kvs (object with our cache) is accessible directly
+// It's bad!
+
 function Cache() {
     if (!(this instanceof Cache)) {
         return new Cache();
@@ -11,7 +14,7 @@ function Cache() {
         find,
         count;
 
-    add = function(key, value) {
+    add = function (key, value) {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
@@ -24,7 +27,7 @@ function Cache() {
 
     };
 
-    update = function(key, value) {
+    update = function (key, value) {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
@@ -37,7 +40,7 @@ function Cache() {
 
     };
 
-    del = function(key) {
+    del = function (key) {
         if (!key) {
             console.log('Key is absent');
         }
@@ -51,7 +54,7 @@ function Cache() {
     };
 
 
-    get = function(key) {
+    get = function (key) {
         if (!key) {
             console.log('Key is absent');
         }
@@ -64,7 +67,7 @@ function Cache() {
 
     };
 
-    find = function(query) {
+    find = function (query) {
         if (!query) {
             console.log('There is no query')
         }
@@ -89,7 +92,7 @@ function Cache() {
 
     };
 
-    count = function(key) {
+    count = function (key) {
         if (key && key in kvs) {
             console.log(kvs[key].length);
             //maybe better use switch
@@ -112,10 +115,10 @@ function Cache() {
     }
 }
 
-//trash generator
-function trash (obj, count) {
+// trash generator
+function trash(obj, count) {
     for (var i = 0; i < count; i++) {
-        obj.add([Math.floor((Math.random() * 10000) + 1)],  Math.floor((Math.random() * 10000) + 1));
+        obj.add([Math.floor((Math.random() * 10000) + 1)], Math.floor((Math.random() * 10000) + 1));
     }
 }
 
@@ -125,3 +128,236 @@ c.add('test', 22);  // duplicate
 c.add('test2', 'test string');
 trash(c, 20);
 c.del('test');
+
+
+// kvs is not accessible directly, only through methods
+// To call method you must do next: var.prototype.add();
+// So it's not very good
+
+function Cache2() {
+    if (!(this instanceof Cache2)) {
+        return new Cache2();
+    }
+
+    var kvs = {};
+
+    Cache2.prototype = {
+        add: function (key, value) {
+            if (arguments.length < 2) {
+                console.log('Key or Value is absent');
+            }
+            else if (!(key in kvs)) {
+                kvs[key] = value;
+            }
+            else {
+                console.log('Duplicate key');
+            }
+
+        },
+
+        update: function (key, value) {
+            if (arguments.length < 2) {
+                console.log('Key or Value is absent');
+            }
+            else if ((key in kvs)) {
+                kvs[key] = value;
+            }
+            else {
+                add(key, value);
+            }
+
+        },
+
+        del: function (key) {
+            if (!key) {
+                console.log('Key is absent');
+            }
+            else if ((key in kvs)) {
+                delete kvs[key];
+            }
+            else {
+                console.log('No such key');
+            }
+
+        },
+
+
+        get: function (key) {
+            if (!key) {
+                console.log('Key is absent');
+            }
+            else if (key in kvs) {
+                return kvs[key];
+            }
+            else {
+                console.log('No such key');
+            }
+
+        },
+
+        find: function (query) {
+            if (!query) {
+                console.log('There is no query')
+            }
+            else if (query) {
+                var result = [],
+                    prop;
+
+                for (prop in kvs) {
+                    if (kvs.hasOwnProperty(prop) && (kvs[prop].toString().indexOf(query)) != -1) {
+                        var obj = {};
+                        obj[prop] = kvs[prop];
+                        result.push(obj);
+                    }
+                }
+
+                console.log(result);
+
+                if (result.length == 0) {
+                    console.log('Sorry, I have found nothing :(');
+                }
+            }
+
+        },
+
+        count: function (key) {
+            if (key && key in kvs) {
+                console.log(kvs[key].length);
+                //maybe better use switch
+            }
+            else {
+                console.log('Total cache prop count: ' + Object.keys(kvs).length);
+            }
+
+        }
+    };
+
+
+    return Cache2;
+}
+
+
+var c2 = new Cache2();
+c2.add('test', 21);
+c2.add('test', 22);  // duplicate
+c2.add('test2', 'test string');
+trash(c2, 20);
+c2.del('test');
+
+
+
+
+
+
+// kvs is not accessible directly, only through methods
+// To call method you don't need type prototype: var.add();
+// So it's good
+
+function Cache3() {
+    if (!(this instanceof Cache3)) {
+        return new Cache3();
+    }
+
+    var kvs = {};
+
+    Cache3.prototype.add = function (key, value) {
+        if (arguments.length < 2) {
+            console.log('Key or Value is absent');
+        }
+        else if (!(key in kvs)) {
+            kvs[key] = value;
+        }
+        else {
+            console.log('Duplicate key');
+        }
+
+    };
+
+    Cache3.prototype.update = function (key, value) {
+        if (arguments.length < 2) {
+            console.log('Key or Value is absent');
+        }
+        else if ((key in kvs)) {
+            kvs[key] = value;
+        }
+        else {
+            add(key, value);
+        }
+
+    };
+
+    Cache3.prototype.del = function (key) {
+        if (!key) {
+            console.log('Key is absent');
+        }
+        else if ((key in kvs)) {
+            delete kvs[key];
+        }
+        else {
+            console.log('No such key');
+        }
+
+    };
+
+
+    Cache3.prototype.get = function (key) {
+        if (!key) {
+            console.log('Key is absent');
+        }
+        else if (key in kvs) {
+            return kvs[key];
+        }
+        else {
+            console.log('No such key');
+        }
+
+    };
+
+    Cache3.prototype.find = function (query) {
+        if (!query) {
+            console.log('There is no query')
+        }
+        else if (query) {
+            var result = [],
+                prop;
+
+            for (prop in kvs) {
+                if (kvs.hasOwnProperty(prop) && (kvs[prop].toString().indexOf(query)) != -1) {
+                    var obj = {};
+                    obj[prop] = kvs[prop];
+                    result.push(obj);
+                }
+            }
+
+            console.log(result);
+
+            if (result.length == 0) {
+                console.log('Sorry, I have found nothing :(');
+            }
+        }
+
+    };
+
+    Cache3.prototype.count = function (key) {
+        if (key && key in kvs) {
+            console.log(kvs[key].length);
+            //maybe better use switch
+        }
+        else {
+            console.log('Total cache prop count: ' + Object.keys(kvs).length);
+        }
+
+    };
+
+}
+
+
+var c3 = new Cache();
+c3.add('test', 21);
+c3.add('test', 22);  // duplicate
+c3.add('test2', 'test string');
+trash(c3, 20);
+c3.del('test');
+
+
+// I think it is better ways of solving this task, I hope I'll find them with help of future experience :)
