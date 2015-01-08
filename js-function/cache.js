@@ -18,8 +18,9 @@ function Cache() {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
-        else if (!(key in kvs)) {
+        else if (!kvs.hasOwnProperty(key)) {
             kvs[key] = value;
+            console.log('Cache successfully has been added');
         }
         else {
             console.log('Duplicate key');
@@ -31,8 +32,9 @@ function Cache() {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
-        else if ((key in kvs)) {
+        else if (kvs.hasOwnProperty(key)) {
             kvs[key] = value;
+            console.log('Cache successfully has been updated');
         }
         else {
             add(key, value);
@@ -44,8 +46,9 @@ function Cache() {
         if (!key) {
             console.log('Key is absent');
         }
-        else if ((key in kvs)) {
+        else if (kvs.hasOwnProperty(key)) {
             delete kvs[key];
+            console.log('Cache key:value pair has been deleted');
         }
         else {
             console.log('No such key');
@@ -58,7 +61,7 @@ function Cache() {
         if (!key) {
             console.log('Key is absent');
         }
-        else if (key in kvs) {
+        else if (kvs.hasOwnProperty(key)) {
             return kvs[key];
         }
         else {
@@ -93,12 +96,19 @@ function Cache() {
     };
 
     count = function (key) {
-        if (key && key in kvs) {
-            console.log(kvs[key].length);
+        if (key && kvs.hasOwnProperty(key)) {
+            console.log('Cache property value length: ' + kvs[key].toString().length);
             //maybe better use switch
         }
         else {
-            console.log('Total cache prop count: ' + Object.keys(kvs).length);
+            var prop, ln = 0;
+            //console.log('Total cache prop count: ' + Object.keys(kvs).length);
+            for (prop in kvs) {
+                if (kvs.hasOwnProperty(prop)) {
+                    ln += kvs[prop].toString().length;
+                }
+            }
+            console.log('Total cache values length: ' + ln);
         }
 
     };
@@ -146,8 +156,9 @@ function Cache2() {
             if (arguments.length < 2) {
                 console.log('Key or Value is absent');
             }
-            else if (!(key in kvs)) {
+            else if (!kvs.hasOwnProperty(key)) {
                 kvs[key] = value;
+                console.log('Cache successfully has been added');
             }
             else {
                 console.log('Duplicate key');
@@ -159,8 +170,9 @@ function Cache2() {
             if (arguments.length < 2) {
                 console.log('Key or Value is absent');
             }
-            else if ((key in kvs)) {
+            else if (kvs.hasOwnProperty(key)) {
                 kvs[key] = value;
+                console.log('Cache successfully has been updated');
             }
             else {
                 add(key, value);
@@ -172,8 +184,9 @@ function Cache2() {
             if (!key) {
                 console.log('Key is absent');
             }
-            else if ((key in kvs)) {
+            else if (kvs.hasOwnProperty(key)) {
                 delete kvs[key];
+                console.log('Cache key:value pair has been deleted');
             }
             else {
                 console.log('No such key');
@@ -186,7 +199,7 @@ function Cache2() {
             if (!key) {
                 console.log('Key is absent');
             }
-            else if (key in kvs) {
+            else if (kvs.hasOwnProperty(key)) {
                 return kvs[key];
             }
             else {
@@ -221,12 +234,19 @@ function Cache2() {
         },
 
         count: function (key) {
-            if (key && key in kvs) {
+            if (key && kvs.hasOwnProperty(key)) {
                 console.log(kvs[key].length);
                 //maybe better use switch
             }
             else {
-                console.log('Total cache prop count: ' + Object.keys(kvs).length);
+                var prop, ln = 0;
+                //console.log('Total cache prop count: ' + Object.keys(kvs).length);
+                for (prop in kvs) {
+                    if (kvs.hasOwnProperty(prop)) {
+                        ln += kvs[prop].toString().length;
+                    }
+                }
+                console.log('Total cache values length: ' + ln);
             }
 
         }
@@ -238,11 +258,11 @@ function Cache2() {
 
 
 var c2 = new Cache2();
-c2.add('test', 21);
-c2.add('test', 22);  // duplicate
-c2.add('test2', 'test string');
-trash(c2, 20);
-c2.del('test');
+c2.prototype.add('test', 21);
+c2.prototype.add('test', 22);  // duplicate
+c2.prototype.add('test2', 'test string');
+trash(c2.prototype, 20);
+c2.prototype.del('test');
 
 
 
@@ -264,8 +284,9 @@ function Cache3() {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
-        else if (!(key in kvs)) {
+        else if (!kvs.hasOwnProperty(key)) {
             kvs[key] = value;
+            console.log('Cache successfully has been added');
         }
         else {
             console.log('Duplicate key');
@@ -277,8 +298,9 @@ function Cache3() {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
         }
-        else if ((key in kvs)) {
+        else if (kvs.hasOwnProperty(key)) {
             kvs[key] = value;
+            console.log('Cache successfully has been updated');
         }
         else {
             add(key, value);
@@ -290,8 +312,9 @@ function Cache3() {
         if (!key) {
             console.log('Key is absent');
         }
-        else if ((key in kvs)) {
+        else if (kvs.hasOwnProperty(key)) {
             delete kvs[key];
+            console.log('Cache key:value pair has been deleted');
         }
         else {
             console.log('No such key');
@@ -304,7 +327,7 @@ function Cache3() {
         if (!key) {
             console.log('Key is absent');
         }
-        else if (key in kvs) {
+        else if (kvs.hasOwnProperty(key)) {
             return kvs[key];
         }
         else {
@@ -339,7 +362,7 @@ function Cache3() {
     };
 
     Cache3.prototype.count = function (key) {
-        if (key && key in kvs) {
+        if (key && kvs.hasOwnProperty(key)) {
             console.log(kvs[key].length);
             //maybe better use switch
         }
