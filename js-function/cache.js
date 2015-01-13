@@ -375,7 +375,7 @@ function Cache3() {
 }
 
 
-var c3 = new Cache();
+var c3 = new Cache3();
 c3.add('test', 21);
 c3.add('test', 22);  // duplicate
 c3.add('test2', 'test string');
