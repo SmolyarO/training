@@ -20,6 +20,26 @@ AVID.namespace = function (nsString) {
 
 };
 
+// module filling
+AVID.namespace('models.assets');
+AVID.models.assets = (function () {
+    var assetsBase = [],
+
+        getAsset = function (id) {
+                return assetsBase[id];
+        },
+        setAsset = function (value) {
+                assetsBase.push(value);
+                console.log(value);
+        };
+    return {
+        get: getAsset,
+        set: setAsset
+    }
+}());
+
+var a = AVID.models.assets;
+
 var assets,
     users,
     links,
@@ -40,3 +60,6 @@ checksum = AVID.namespace('helpers.checksum');
 // apis
 rest = AVID.namespace('apis.rest');
 bus = AVID.namespace('apis.bus');
+
+console.log(assets.setAsset('test'));
+console.log(assets.getAsset(0));
