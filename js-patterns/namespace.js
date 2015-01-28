@@ -23,14 +23,14 @@ AVID.namespace = function (nsString) {
 // module filling
 AVID.namespace('models.assets');
 AVID.models.assets = (function () {
-    var assetsBase = [],
+    var assetsBase = {},
 
-        getAsset = function (id) {
-                return assetsBase[id];
+        getAsset = function (key) {
+                return assetsBase[key];
         },
-        setAsset = function (value) {
-                assetsBase.push(value);
-                console.log(value);
+        setAsset = function (key, value) {
+            assetsBase[key] = value;
+            return assetsBase[key];
         };
     return {
         get: getAsset,
@@ -61,5 +61,5 @@ checksum = AVID.namespace('helpers.checksum');
 rest = AVID.namespace('apis.rest');
 bus = AVID.namespace('apis.bus');
 
-console.log(assets.setAsset('test'));
-console.log(assets.getAsset(0));
+console.log(assets.set('test'));
+console.log(assets.get(0));
