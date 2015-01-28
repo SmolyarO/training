@@ -27,16 +27,18 @@ function Cache() {
 
         kvs[key] = value;
         console.log('Cache successfully has been added');
-
+        return kvs[key];
     };
 
     update = function (key, value) {
         if (arguments.length < 2) {
             console.log('Key or Value is absent');
+            return null;
         }
         else if (kvs.hasOwnProperty(key)) {
             kvs[key] = value;
             console.log('Cache successfully has been updated');
+            return kvs[key];
         }
         else {
             add(key, value);
@@ -47,13 +49,16 @@ function Cache() {
     del = function (key) {
         if (!key) {
             console.log('Key is absent');
+            return null;
         }
         else if (kvs.hasOwnProperty(key)) {
             delete kvs[key];
             console.log('Cache key:value pair has been deleted');
+            return true;
         }
         else {
             console.log('No such key');
+            return undefined;
         }
 
     };
@@ -76,6 +81,7 @@ function Cache() {
     find = function (query) {
         if (!query) {
             console.log('There is no query')
+            return null;
         }
         else if (query) {
             var result = [],
@@ -93,6 +99,7 @@ function Cache() {
 
             if (result.length == 0) {
                 console.log('Sorry, I have found nothing :(');
+                return null;
             }
 
             return result;
