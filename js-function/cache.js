@@ -297,64 +297,73 @@ function Cache3() {
 Cache3.prototype.add = function (key, value) {
     if (arguments.length < 2) {
         console.log('Key or Value is absent');
-    }
-    else if (!this._kvs[key]) {
-        kvs[key] = value;
-        console.log('Cache successfully has been added');
-    }
-    else {
-        console.log('Duplicate key');
+        return false;
     }
 
+    if (_kvs[key]) {
+        console.log('Duplicate key');
+        return false;
+    }
+
+    kvs[key] = value;
+    console.log('Cache successfully has been added');
+    return kvs[key];
 };
 
 Cache3.prototype.update = function (key, value) {
     if (arguments.length < 2) {
         console.log('Key or Value is absent');
-    }
-    else if (kvs.hasOwnProperty(key)) {
-        kvs[key] = value;
-        console.log('Cache successfully has been updated');
-    }
-    else {
-        add(key, value);
+        return null;
     }
 
+    if (kvs.hasOwnProperty(key)) {
+        kvs[key] = value;
+        console.log('Cache successfully has been updated');
+        return kvs[key];
+    }
+
+    // will add new record
+    add(key, value);
 };
 
 Cache3.prototype.del = function (key) {
     if (!key) {
         console.log('Key is absent');
-    }
-    else if (kvs.hasOwnProperty(key)) {
-        delete kvs[key];
-        console.log('Cache key:value pair has been deleted');
-    }
-    else {
-        console.log('No such key');
+        return null;
     }
 
+    if (kvs.hasOwnProperty(key)) {
+        delete kvs[key];
+        console.log('Cache key:value pair has been deleted');
+        return true;
+    }
+
+    console.log('No such key');
+    return undefined;
 };
 
 
 Cache3.prototype.get = function (key) {
     if (!key) {
         console.log('Key is absent');
-    }
-    else if (kvs.hasOwnProperty(key)) {
-        return kvs[key];
-    }
-    else {
-        console.log('No such key');
+        return null;
     }
 
+    if (kvs[key]) {
+        return kvs[key];
+    }
+
+    console.log('No such key');
+    return null;
 };
 
 Cache3.prototype.find = function (query) {
     if (!query) {
         console.log('There is no query')
+        return null;
     }
-    else if (query) {
+
+    if (query) {
         var result = [],
             prop;
 
@@ -370,20 +379,38 @@ Cache3.prototype.find = function (query) {
 
         if (result.length == 0) {
             console.log('Sorry, I have found nothing :(');
+            return null;
         }
-    }
 
+        return result;
+    }
 };
 
 Cache3.prototype.count = function (key) {
-    if (key && kvs[key] !== undefined) {
+    if (key && kvs.hasOwnProperty(key)) {
+        console.log('Cache property value length: ' + kvs[key].toString().length);
+        //maybe better use switch
+        return kvs[key].toString().length;
+    }
+
+    var prop, ln = 0;
+    //console.log('Total cache prop count: ' + Object.keys(kvs).length);
+    for (prop in kvs) {
+        if (kvs.hasOwnProperty(prop)) {
+            ln += kvs[prop].toString().length;
+        }
+    }
+    console.log('Total cache values length: ' + ln);
+    return ln;
+    
+    /*if (key && kvs[key] !== undefined) {
         console.log(kvs[key].length);
         return 0;
         //maybe better use switch
     }
 
     console.log('Total cache prop count: ' + Object.keys(kvs).length);
-
+*/
 
 };
 
