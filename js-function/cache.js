@@ -35,15 +35,15 @@ function Cache() {
             console.log('Key or Value is absent');
             return null;
         }
-        else if (kvs.hasOwnProperty(key)) {
+
+        if (kvs.hasOwnProperty(key)) {
             kvs[key] = value;
             console.log('Cache successfully has been updated');
             return kvs[key];
         }
-        else {
-            add(key, value);
-        }
 
+        // will add new record
+        add(key, value);
     };
 
     del = function (key) {
@@ -51,16 +51,15 @@ function Cache() {
             console.log('Key is absent');
             return null;
         }
-        else if (kvs.hasOwnProperty(key)) {
+
+        if (kvs.hasOwnProperty(key)) {
             delete kvs[key];
             console.log('Cache key:value pair has been deleted');
             return true;
         }
-        else {
-            console.log('No such key');
-            return undefined;
-        }
 
+        console.log('No such key');
+        return undefined;
     };
 
 
@@ -83,7 +82,8 @@ function Cache() {
             console.log('There is no query')
             return null;
         }
-        else if (query) {
+
+        if (query) {
             var result = [],
                 prop;
 
@@ -104,7 +104,6 @@ function Cache() {
 
             return result;
         }
-
     };
 
     count = function (key) {
@@ -123,8 +122,6 @@ function Cache() {
         }
         console.log('Total cache values length: ' + ln);
         return ln;
-
-
     };
 
 
@@ -168,14 +165,17 @@ function Cache2() {
         add: function (key, value) {
             if (arguments.length < 2) {
                 console.log('Key or Value is absent');
+                return false;
             }
-            else if (!kvs.hasOwnProperty(key)) {
-                kvs[key] = value;
-                console.log('Cache successfully has been added');
-            }
-            else {
+
+            if (kvs[key]) {
                 console.log('Duplicate key');
+                return false;
             }
+
+            kvs[key] = value;
+            console.log('Cache successfully has been added');
+            return kvs[key];
 
         },
 
