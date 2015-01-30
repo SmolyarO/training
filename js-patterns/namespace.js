@@ -26,10 +26,32 @@ AVID.models.assets = (function () {
     var assetsBase = {},
 
         getAsset = function (key) {
+            if (!key) {
+                console.log('You have not entered Key');
+                return null;
+            }
+
+            if (assetsBase[key]) {
                 return assetsBase[key];
+            }
+
+            console.log('No such key');
+            return null;
         },
+
         setAsset = function (key, value) {
+            if (arguments.length < 2) {
+                console.log('Key or Value is absent');
+                return null;
+            }
+
+            if (assetsBase[key]) {
+                console.log('Duplicate key');
+                return false;
+            }
+
             assetsBase[key] = value;
+            console.log('Cache successfully has been added');
             return assetsBase[key];
         };
     return {
