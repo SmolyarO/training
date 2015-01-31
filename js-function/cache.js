@@ -311,14 +311,14 @@ Cache3.prototype.add = function (key, value) {
         return false;
     }
 
-    if (_kvs[key]) {
+    if (this._kvs[key]) {
         console.log('Duplicate key');
         return false;
     }
 
-    kvs[key] = value;
+    this._kvs[key] = value;
     console.log('Cache successfully has been added');
-    return kvs[key];
+    return this._kvs[key];
 };
 
 Cache3.prototype.update = function (key, value) {
@@ -327,10 +327,10 @@ Cache3.prototype.update = function (key, value) {
         return null;
     }
 
-    if (kvs.hasOwnProperty(key)) {
-        kvs[key] = value;
+    if (this._kvs.hasOwnProperty(key)) {
+        this._kvs[key] = value;
         console.log('Cache successfully has been updated');
-        return kvs[key];
+        return this._kvs[key];
     }
 
     // will add new record
@@ -344,8 +344,8 @@ Cache3.prototype.del = function (key) {
         return null;
     }
 
-    if (kvs.hasOwnProperty(key)) {
-        delete kvs[key];
+    if (this._kvs.hasOwnProperty(key)) {
+        delete this._kvs[key];
         console.log('Cache key:value pair has been deleted');
         return true;
     }
@@ -361,8 +361,8 @@ Cache3.prototype.get = function (key) {
         return null;
     }
 
-    if (kvs[key]) {
-        return kvs[key];
+    if (this._kvs[key]) {
+        return this._kvs[key];
     }
 
     console.log('No such key');
@@ -379,10 +379,10 @@ Cache3.prototype.find = function (query) {
         var result = [],
             prop;
 
-        for (prop in kvs) {
-            if (kvs.hasOwnProperty(prop) && (kvs[prop].toString().indexOf(query)) != -1) {
+        for (prop in this._kvs) {
+            if (this._kvs.hasOwnProperty(prop) && (this._kvs[prop].toString().indexOf(query)) != -1) {
                 var obj = {};
-                obj[prop] = kvs[prop];
+                obj[prop] = this._kvs[prop];
                 result.push(obj);
             }
         }
@@ -399,17 +399,17 @@ Cache3.prototype.find = function (query) {
 };
 
 Cache3.prototype.count = function (key) {
-    if (key && kvs.hasOwnProperty(key)) {
-        console.log('Cache property value length: ' + kvs[key].toString().length);
+    if (key && this._kvs.hasOwnProperty(key)) {
+        console.log('Cache property value length: ' + this._kvs[key].toString().length);
         //maybe better use switch
-        return kvs[key].toString().length;
+        return this._kvs[key].toString().length;
     }
 
     var prop, ln = 0;
     //console.log('Total cache prop count: ' + Object.keys(kvs).length);
     for (prop in kvs) {
-        if (kvs.hasOwnProperty(prop)) {
-            ln += kvs[prop].toString().length;
+        if (this._kvs.hasOwnProperty(prop)) {
+            ln += this._kvs[prop].toString().length;
         }
     }
     console.log('Total cache values length: ' + ln);
