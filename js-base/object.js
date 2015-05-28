@@ -17,6 +17,7 @@
 	.create()  // Creates a new object with the specified prototype object and properties.
 	var obj5 = {};  // is equivalent to:
 	obj5 = Object.create(null);
+	var obj6 = Object.create(obj5); // obj6 ---> obj5 ---> Object.prototype ---> null
 	
 	.defineProperty()  // Adds the named property described by a given descriptor to an object.
 	var obj5 = {};
